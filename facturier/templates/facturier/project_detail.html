@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Projects Listing</h1>
+
+<div class="project-detail">
+    <ul>
+        <li>{{ project.Project_name }}</li>
+        <li>{{ project.creation_date }}</li>
+        <li>{{ project.user }}</li>
+    </ul>
+</div>
+
+{% endblock %}
