@@ -11,6 +11,7 @@ class Project(models.Model):
     creation_date = models.DateField()
     status = models.ForeignKey('Status')
     client = models.ForeignKey('Client')
+
     user = models.ForeignKey(User)
 
     def __unicode__(self):
