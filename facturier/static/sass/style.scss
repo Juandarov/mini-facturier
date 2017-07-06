@@ -1,3 +1,54 @@
 body {
     background-color: rgb(167, 250, 255);
 }
+
+h1 {
+    text-align: center;
+}
+
+// PROJECT DETAIL CSS
+
+.project-detail {
+    width: 50%;
+    margin: auto;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+th {
+    background-color: rgb(133, 133, 133);
+    border: 1px solid #dddddd;
+}
+
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+// PROJECT LIST CSS
+
+.project-list, .client-list{
+    width: 50%;
+    margin: auto;
+}
+
+// PROJECT FORM CSS
+.project-form {
+    width: 60%;
+    margin: auto;
+}
+
+.form-group {
+}
+
+// PROJECT UPDATE CSS
+
+.details {
+    width: 40%;
+    margin: auto;
+}

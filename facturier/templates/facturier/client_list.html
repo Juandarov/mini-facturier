@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Create Project</h1>
+<div class="client-list">
+    <ul>
+        {% for client in clients %}
+        <li>{{ client.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

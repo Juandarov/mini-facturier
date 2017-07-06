@@ -5,17 +5,15 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import CreateView
 
-from form import inlineform
+from .forms import ProjectInlineFormset
 
 from django.forms import inlineformset_factory
 
-from .models import Project, ProjectLine
+from .models import *
 
 # Create your views here.
-
 def homepage(request):
     return render(request, "homepage.html")
-
 
 class ProjectList(ListView):
     model = Project
@@ -23,45 +21,45 @@ class ProjectList(ListView):
 
 class ProjectDetail(DetailView):
     model = Project
-    # project_line = ProjectLine.objects.all()
-    #
-    # def get_data(self, context):
-    #
-    #     context = {
-    #         "model" : Project,
-    #         "project_line" : ProjectLine
-    #     }
-    #
-    #     return context
+    def lines(self):
+        return ProjectLine.objects.filter(project=self.object)
 
-
-class ProjectUpdate(DetailView):
+class ProjectUpdate(UpdateView):
     model = Project
-    # fields = ['status', 'Project_name']
-    #
-    # def get_success_url(self):
-    #     return reverse('profile-detail', kwargs={'slug': self.object.user.username})
+    fields = ['status']
+    template_name_suffix = '_update_form'
+
+    def get_success_url(self):
+        return reverse('project-detail', kwargs={'pk': self.object.id})
+
+class ClientCreate(CreateView):
+    model = Client
+    fields = "__all__"
+
+    def get_success_url(self):
+        return reverse('client-list')
+
+class ClientList(ListView):
+    model = Client
+    context_object_name = "clients"
 
 class ProjectCreate(CreateView):
     model = Project
-
     fields = "__all__"
 
-    def lines(self):
-        if self.request.POST:
-            return inlineform(self.request.POST)
-        else:
-            return inlineform()
+    def get_context_data(self):
+        context = CreateView.get_context_data(self)
+        context["facturier_formset"] = ProjectInlineFormset()
+        return context
 
     def form_valid(self, form):
-        projectLine = self.lines()
-        self.object = form.save()
+        facturier_resp = CreateView.form_valid(self, form)
+        facturier_formset = ProjectInlineFormset(self.request.POST, instance=self.object)
 
-        if projectLine.is_valid():
-            projectLine.instance = self.object
-            projectLine.save()
+        if facturier_formset.is_valid():
+            facturier_formset.save()
 
-        return super(ProjectCreate, self).form_valid(form)
+        return facturier_resp
 
     def get_success_url(self):
         return reverse('project-list')

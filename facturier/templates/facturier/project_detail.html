@@ -1,17 +1,43 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
-
-<h1>Projects Listing</h1>
+<h1>Projects Details</h1>
 
 <div class="project-detail">
-    <ul>
-        <li>{{ project.Project_name }}</li>
-        <li>{{ project.creation_date }}</li>
-        <li>{{ project.user }}</li>
-        <li>{{ project.status }}</li>
+    <table>
+        <tr>
+            <th>Project name</th>
+            <th>Creation date</th>
+            <th>User</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>{{ project.Project_name }}</td>
+            <td>{{ project.creation_date }}</td>
+            <td>{{ project.user }}</td>
+            <td>{{ project.get_status_display }}</td>
+        </tr>
+    </table>
 
-    </ul>
+    <table>
+        <tr>
+            <th>Product type</th>
+            <th>quantity</th>
+            <th>Price per unit</th>
+            <th>TOTAL</th>
+        </tr>
+        {% for line in view.lines %}
+        <tr>
+            <td>{{ line.label }}</td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.unit_price }}</td>
+            <td>{{ line.project_price }} €</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="">
+        <a class="btn btn-warning" href="{% url 'project-update' project.id %}" role="button">Update Status of product</a>
+    </div>
 </div>
 
 {% endblock %}

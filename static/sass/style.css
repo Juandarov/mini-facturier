@@ -1,4 +1,37 @@
 body {
   background-color: #a7faff; }
 
+h1 {
+  text-align: center; }
+
+.project-detail {
+  width: 50%;
+  margin: auto; }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0; }
+
+th {
+  background-color: #858585;
+  border: 1px solid #dddddd; }
+
+td {
+  border: 1px solid #dddddd;
+  text-align: left; }
+
+.project-list, .client-list {
+  width: 50%;
+  margin: auto; }
+
+.project-form {
+  width: 60%;
+  margin: auto; }
+
+.details {
+  width: 40%;
+  margin: auto; }
+
 /*# sourceMappingURL=../../../../../../../../../static/sass/style.css.map */

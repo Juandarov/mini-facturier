@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Update Status</h1>
+
+<div class="details">
+    <table>
+        <tr>
+            <th>Project name</th>
+            <th>Creation date</th>
+            <th>User</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>{{ project.Project_name }}</td>
+            <td>{{ project.creation_date }}</td>
+            <td>{{ project.user }}</td>
+            <form action="" method="post">{% csrf_token %}
+            <td>{{ form.as_p }}</td>
+            <input type="submit" value="Update" />
+        </tr>
+    </table>
+</div>
+
+</form>
+
+{% endblock %}
